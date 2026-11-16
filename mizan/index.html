@@ -1951,7 +1951,7 @@ function markBadge(id){const ev=S.set.ev||{};if(ev[id])return;S.set={...S.set,ev
 let badgeT=null;const CELQ=[];
 function queueBadgeCheck(){if(!S.uid||!S.ready||!S.loaded||!S.hasSet)return;clearTimeout(badgeT);badgeT=setTimeout(checkBadges,900);}
 function checkBadges(){if(!S.uid||!S.hasSet)return;if(SH.length||document.querySelector('.story,.cel')||!$('#lock').hidden){badgeT=setTimeout(checkBadges,1500);return;}
-  const st=badgeState(),init=!S.set.ach,ach={...(S.set.ach||{})},fresh=[];let ch=false;
+  const st=badgeState(),init=!S.set.ach&&txs().length>=12,ach={...(S.set.ach||{})},fresh=[];let ch=false;
   for(const b of st)if(b.ok&&!ach[b.id]){ach[b.id]=Date.now();ch=true;if(!init)fresh.push(b);}
   if(init&&!ch)ch=true;
   if(ch){S.set={...S.set,ach};qSt('settings','main',S.set);saveCache();}
